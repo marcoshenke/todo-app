@@ -24,7 +24,7 @@
 
 -   https://app.todoist.com/app/today
 
-# Como configurar vue com laravel:
+# Como usar bootstrap com vue e laravel
 
--   https://vueschool.io/articles/vuejs-tutorials/the-ultimate-guide-for-using-vue-js-with-laravel/
-    Parei em: We still need to make it a dynamic single-page application. To achieve this, we will use Vue Router. Let’s create a new file ./resources/js/router.js to define the router :
+-   https://aalhommada.medium.com/make-todo-list-app-with-laravel-vue-js-and-bootstrap-10dfb4ed7563
+-   parei em "and in webpack.mix.js we need to add .vue() , so the code with be like the following"
