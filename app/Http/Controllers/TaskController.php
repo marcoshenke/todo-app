@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use Illuminate\Support\Carbon;
 
-class ItemController extends Controller
+class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.

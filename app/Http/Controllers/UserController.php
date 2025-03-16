@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class UserController extends Controller
 {
@@ -25,11 +26,9 @@ class UserController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        // Fazer login automaticamente
         Auth::login($user);
-        // Criar token para manter o usuário logado
+
         $token = $user->createToken('auth_token')->plainTextToken;
-        dd($user);
 
         return response()->json([
             'message' => 'User registered and logged in successfully',
@@ -40,27 +39,52 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        // Validação
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+        try {
+            $credentials = $request->validate([
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
 
-        // Verificar credenciais
-        if (!Auth::attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            if (!Auth::attempt($credentials)) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+
+            $user = User::where('email', $credentials['email'])->first();
+
+            Auth::login($user);
+            $token = $user->createToken('auth_token')->plainTextToken;
+
+            return response()->json([
+                'message' => 'Login successful',
+                'token' => $token,
+                'user' => $user
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage(),
+            ], 500);;
+        }
+    }
+
+    public function authenticatedUser(Request $request)
+    {
+
+        $token = $request->bearerToken();
+
+        if (!$token) {
+            return response()->json(['error' => 'Token not provided'], 401);
         }
 
-        $user = Auth::user();
+        $accessToken = PersonalAccessToken::findToken($token);
 
-        // Criar token para autenticação
-        $token = $user->createToken('auth_token')->plainTextToken;
+        if (!$accessToken) {
+            return response()->json(['error' => 'Invalid or missing token'], 401);
+        }
 
-        return response()->json([
-            'message' => 'Login successful',
-            'token' => $token,
-            'user' => $user
-        ], 200);
+        $user = $accessToken->tokenable;
+
+        return response()->json(['user' => $user], 200);
     }
 
     public function logout(Request $request)
