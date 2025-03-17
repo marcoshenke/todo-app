@@ -3,101 +3,95 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Item;
+use App\Models\Task;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function index(Request $request)
     {
-        return Item::orderBy('created_at', 'desc')->get();
+        $query = Task::orderBy('created_at', 'desc');
+
+        $userId = Auth::user()->id;
+
+        $query->where('user_id', $userId);
+
+        if ($request->filled('title')) {
+            $query->where('title', 'like', '%' . $request->input('title') . '%');
+        }
+
+        if ($request->filled('description')) {
+            $query->where('description', 'like', '%' . $request->input('description') . '%');
+        }
+
+        if ($request->filled('task_date')) {
+            $query->whereDate('task_date', $request->input('task_date'));
+        }
+
+        return $query->get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $newItem = new Item;
-        $newItem->name = $request->item['name'];
-        $newItem->save();
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'string|max:500',
+            'task_date' => 'required|date',
+        ]);
 
-        return $newItem;
+        $user = Auth::user();
+        Log::debug('Usuário autenticado:', ['user' => $user]);
+        $task = Task::create([
+            'title' => $validated['title'],
+            'description' => $validated['description'],
+            'task_date' => Carbon::parse($validated['task_date']),
+            'user_id' => $user->id,
+        ]);
+
+        return response()->json([
+            'message' => 'Task created with success',
+            'task' => $task,
+        ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-        $existingItem = Item::find($id);
+        $existingTask = Task::find($id);
 
-        if ($existingItem) {
-            $existingItem->completed = $request->item['completed'] ? true : false;
-            $existingItem->updated_at = Carbon::now();
-            $existingItem->save();
-            return $existingItem;
+        if ($existingTask) {
+            $existingTask->completed = $request->task['completed'] ? true : false;
+            $existingTask->updated_at = Carbon::now();
+            $existingTask->save();
+            return $existingTask;
         }
-        return "Item not found";
+        return "Task not found";
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
-        $existingItem = Item::find($id);
-        if ($existingItem) {
-            $existingItem->delete();
-            return "Item deleted";
+        $existingTask = Task::find($id);
+        if ($existingTask) {
+            $existingTask->delete();
+            return "Task deleted";
         }
-        return "Item not found";
+        return "Task not found";
     }
 }

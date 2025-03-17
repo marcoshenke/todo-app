@@ -22,15 +22,25 @@
 
 # Coisas a serem feitas
 
--   [x] Registro de usuários
-    -   [ ] Validar email correto
-    -   [ ] Se der tempo fazer login com google
 -   [x] Autenticação
 -   [x] Pensar na estrutura das tabelas tasks
--   [ ] Procurar tasks por dia
+-   [x] Registro de usuários
+-   [ ] CRUD de tasks
+    -   [ ] Arrumar listagem só permitir listar se for o usuário da task, não esta vindo task alguma
+    -   [ ] Fazer visualização
+    -   [ ] Editar
+    -   [ ] Exclusão
+-   [ ] Mehoria de UX
+    -   [ ] Procurar tasks por dia, ao selecionar na data do calendario.
+    -   [ ] Quando o usuário tentar entrar em uma tela e não estiver logado retornar erro com snackbar
+-   [x] Validação de formulários, procurar uma lib
+    -   [x] Validar email correto
+    -   [ ] Validar login
+    -   [ ] Validar criação e edição de tasks
+    -   [ ] Fazer login com google
 -   [ ] Estilização com bootstrap
     -   [ ] Mudar as fontes
--   [ ] Deixar responsivo para celular
+    -   [ ] Deixar responsivo para celular e computador
 -   [ ] Melhorar como retorna erro e feedback de sucesso, ver se bootstrap tem algo similar ao snackbar do mui
 -   [ ] Deploy
 
