@@ -13,25 +13,17 @@ class TaskController extends Controller
 
     public function index(Request $request)
     {
-        $query = Task::orderBy('created_at', 'desc');
+        $userId = Auth::id();
+        $date = Carbon::parse($request->input('task_date'))->toDateString();
 
-        $userId = Auth::user()->id;
+        $query =  Task::where('user_id', $userId)
+            ->whereDate('task_date', $date)
+            ->orderBy('created_at', 'desc');
 
-        $query->where('user_id', $userId);
 
-        if ($request->filled('title')) {
-            $query->where('title', 'like', '%' . $request->input('title') . '%');
-        }
+        $tasks = $query->get();
 
-        if ($request->filled('description')) {
-            $query->where('description', 'like', '%' . $request->input('description') . '%');
-        }
-
-        if ($request->filled('task_date')) {
-            $query->whereDate('task_date', $request->input('task_date'));
-        }
-
-        return $query->get();
+        return response()->json($tasks);
     }
 
 
@@ -44,11 +36,11 @@ class TaskController extends Controller
         ]);
 
         $user = Auth::user();
-        Log::debug('Usuário autenticado:', ['user' => $user]);
+
         $task = Task::create([
             'title' => $validated['title'],
             'description' => $validated['description'],
-            'task_date' => Carbon::parse($validated['task_date']),
+            'task_date' => $validated['task_date'],
             'user_id' => $user->id,
         ]);
 
