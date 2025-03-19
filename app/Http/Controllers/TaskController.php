@@ -30,7 +30,7 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
+            'title' => 'required|string|max:50',
             'description' => 'string|max:500',
             'task_date' => 'required|date',
         ]);
@@ -67,22 +67,35 @@ class TaskController extends Controller
     {
         $existingTask = Task::find($id);
 
-        if ($existingTask) {
-            $existingTask->completed = $request->task['completed'] ? true : false;
-            $existingTask->updated_at = Carbon::now();
-            $existingTask->save();
-            return $existingTask;
+        if ($existingTask->user_id !== Auth::id()) {
+            return response()->json(['message' => 'Access denied.'], 403);
         }
-        return "Task not found";
+
+        $validated = $request->validate([
+            'title' => 'sometimes|string|max:255',
+            'description' => 'sometimes|nullable|string|max:1000',
+            'completed' => 'sometimes|boolean'
+        ]);
+
+        $existingTask->update($validated);
+
+        return response()->json([
+            'message' => 'Tarefa updated with success!',
+            'task' => $existingTask
+        ]);
     }
 
 
     public function destroy($id)
     {
         $existingTask = Task::find($id);
+        if ($existingTask->user_id !== Auth::id()) {
+            return response()->json(['message' => 'Access denied.'], 403);
+        }
+
         if ($existingTask) {
             $existingTask->delete();
-            return "Task deleted";
+            return "Task delete with success";
         }
         return "Task not found";
     }
