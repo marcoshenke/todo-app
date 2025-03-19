@@ -1,26 +1,4 @@
-## Requirements:
-
--   Laravel (PHP)
--   Vue.js
--   Bootstrap
--   MySQL
-
-## Task:
-
--   Create a simple Todo application.
-
-## Features:
-
--   User authentication (registration, login, logout).
--   Users can create, edit, delete, and mark tasks as complete.
--   Display tasks in a responsive interface using Bootstrap.
-
-## Deliverables:
-
--   Laravel API backend.
--   Vue.js frontend.
-
-# Coisas a serem feitas
+# TodoApp
 
 -   # Bugs
     -
@@ -47,6 +25,7 @@
 -   [x] Procurar tasks por dia, ao selecionar na data do calendario.
 -   [] adicionar loading durante o carregamentos das requests
 -   [] Retorno de erros com snackbar
+-   [] Melhor controller, fazer um baseController para retornar os json de sucesso e erro
 -   [ ] Confirmação de senha 2 vezes
 -   [] Adicionar olho para ver a senha
 -   [ ] Quando o usuário tentar entrar em uma tela e não estiver logado retornar erro com snackbar
