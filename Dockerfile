@@ -2,6 +2,8 @@ FROM richarvey/nginx-php-fpm:1.7.2
 
 COPY . .
 
+RUN composer install --no-dev --optimize-autoloader
+
 # Image config
 ENV SKIP_COMPOSER 1
 ENV WEBROOT /var/www/html/public
