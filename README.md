@@ -1,7 +1,5 @@
 # TodoApp
 
--   # Bugs
-    -
 -   # Funcionalidade
 -   [x] Autenticação
 -   [x] Pensar na estrutura das tabelas tasks
@@ -21,15 +19,20 @@
         -   [x] Adicionar fontes
         -   [x] Adicionar cores
     -   [x] Deixar responsivo para celular e computador
+-   # Bugs
+    -
 -   # Mehorias
 -   [x] Procurar tasks por dia, ao selecionar na data do calendario.
--   [] adicionar loading durante o carregamentos das requests
+-   [x] adicionar loading durante o carregamentos das requests
+-   [x] traduzir textos ptbr para ingles
+-   [x] adicionar db:transaction nas transações da api, estudar como faz
+-   [x] retirar os else do codigo da web
+-   [x] Melhorar controller, fazer um baseController para retornar os json de sucesso e erro
+-   [ ] Deploy da api e frontend
 -   [] Retorno de erros com snackbar
--   [] Melhor controller, fazer um baseController para retornar os json de sucesso e erro
 -   [ ] Confirmação de senha 2 vezes
 -   [] Adicionar olho para ver a senha
--   [ ] Quando o usuário tentar entrar em uma tela e não estiver logado retornar erro com snackbar
--   [ ] Deploy da api e frontend
--   [ ] Escrever um um readme bom
+-   [ ] Escrever um um readme bom em inglês
+-   [ ] Deixar footer fixo
 -   [] Adicionar uma barra de progresso ao ir completendo as terafas
--   [ ] Fazer login com google
+-   [] Escolher mais umas 3 frases sobre resolver tarefas e ficar trocando

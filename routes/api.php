@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
 
 
 
@@ -17,5 +18,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller(UserController::class)->group(function () {
         Route::post('logout', 'logout');
         Route::get('authenticated-user', 'authenticatedUser');
+        Route::get('validate-token', 'validateToken');
     });
 });

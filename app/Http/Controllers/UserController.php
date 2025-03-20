@@ -91,4 +91,9 @@ class UserController extends Controller
 
         return response()->json(['message' => 'Logged out'], 200);
     }
+
+    public function validateToken()
+    {
+        return response()->json(['message' => 'Valid token'], 200);
+    }
 }
