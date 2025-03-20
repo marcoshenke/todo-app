@@ -1,28 +1,49 @@
-FROM php:8.1-fpm
+FROM php:8.2-fpm
 
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
+    git \
+    curl \
     libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
     libonig-dev \
     libxml2-dev \
     zip \
     unzip \
-    git \
-    curl \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+    nginx
 
-COPY --from=composer:2.6 /usr/bin/composer /usr/bin/composer
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+# Get latest Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Set working directory
 WORKDIR /var/www/html
 
+# Set composer to run as root
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+# Copy existing application directory
 COPY . .
 
-RUN composer install --no-dev --optimize-autoloader
+# Install dependencies
+RUN composer install --no-interaction --no-dev --prefer-dist --optimize-autoloader
 
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+# Copy Nginx configuration
+COPY nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 8000
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-CMD ["php-fpm"]
+# Expose port
+EXPOSE ${PORT}
+
+# Start script
+COPY start.sh /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/start.sh
+
+CMD ["/usr/local/bin/start.sh"]

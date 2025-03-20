@@ -30,9 +30,9 @@
 -   [x] Melhorar controller, fazer um baseController para retornar os json de sucesso e erro
 -   [ ] Deploy da api e frontend
 -   [] Retorno de erros com snackbar
+    -   https://www.npmjs.com/package/vue-toast-notification
+-   [ ] Escrever um um readme bom em inglês
 -   [ ] Confirmação de senha 2 vezes
 -   [] Adicionar olho para ver a senha
--   [ ] Escrever um um readme bom em inglês
--   [ ] Deixar footer fixo
 -   [] Adicionar uma barra de progresso ao ir completendo as terafas
 -   [] Escolher mais umas 3 frases sobre resolver tarefas e ficar trocando
