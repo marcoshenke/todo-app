@@ -15,21 +15,22 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie', 'todo-app-x4hz.onrender.com/api/'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
-    'allowed_methods' => ['GET, POST, PUT, DELETE, OPTIONS'],
+    'allowed_methods' => ['*'],
+
+    'allowed_origins' => [
+        'http://localhost:5173',
+        'https://todo-app-marcos-es-henke.vercel.app',
+    ],
 
     'allowed_origins_patterns' => [],
 
     'allowed_headers' => ['*'],
 
-    'allowed_origins' => ['*'],
-
     'exposed_headers' => [],
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
-
-
+    'supports_credentials' => true,
 ];
