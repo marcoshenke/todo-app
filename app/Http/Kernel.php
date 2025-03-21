@@ -9,7 +9,7 @@ class Kernel extends HttpKernel
 {
     protected $middlewareGroups = [
         'api' => [
-            \App\Http\Middleware\OwnCors::class,
+            \Illuminate\Http\Middleware\HandleCors::class,
             EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
