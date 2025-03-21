@@ -21,13 +21,13 @@ return [
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['Origin, Content-Type, Accept, Authorization, X-Requested-With'],
+    'allowed_headers' => ['Origin, Content-Type, Accept, Authorization, X-Requested-With', '*'],
 
     'exposed_headers' => [],
 
     'max_age' => 0,
 
-    'allowed_origins' => ['http://localhost:5173', 'https://todo-app-marcos-es-henke.vercel.app', 'https://todo-app-frontend-afditznrm-marcoshenkes-projects.vercel.app'],
+    'allowed_origins' => ['http://localhost:5173', 'https://todo-app-marcos-es-henke.vercel.app', 'https://todo-app-frontend-afditznrm-marcoshenkes-projects.vercel.app', '*'],
 
     'supports_credentials' => true,
 
