@@ -11,7 +11,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        \Illuminate\Foundation\AliasLoader::getInstance();
     }
 
 
