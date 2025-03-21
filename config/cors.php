@@ -27,7 +27,7 @@ return [
 
     'max_age' => 0,
 
-    'allowed_origins' => ['http://localhost:5173', 'https://todo-app-marcos-es-henke.vercel.app/'],
+    'allowed_origins' => ['http://localhost:5173', 'https://todo-app-marcos-es-henke.vercel.app'],
 
     'supports_credentials' => true,
 
