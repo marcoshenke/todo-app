@@ -15,19 +15,20 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', 'todo-app-x4hz.onrender.com/api/'],
 
     'allowed_methods' => ['GET, POST, PUT, DELETE, OPTIONS'],
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['Origin, Content-Type, Accept, Authorization, X-Requested-With', '*'],
+    'allowed_headers' => ['*'],
+
+    'allowed_origins' => ['*'],
 
     'exposed_headers' => [],
 
     'max_age' => 0,
 
-    'allowed_origins' => ['http://localhost:5173', 'https://todo-app-marcos-es-henke.vercel.app', 'https://todo-app-frontend-afditznrm-marcoshenkes-projects.vercel.app', '*'],
 
     'supports_credentials' => true,
 
