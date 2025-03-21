@@ -21,3 +21,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('validate-token', 'validateToken');
     });
 });
+
+Route::get('/health-check', function () {
+    return response()->json([
+        'status' => 'success',
+        'message' => 'API is working!',
+    ], 200);
+});

@@ -1,38 +1,61 @@
-# TodoApp
+# 📝 Todo App - Backend (Laravel 12 API)
 
--   # Funcionalidade
--   [x] Autenticação
--   [x] Pensar na estrutura das tabelas tasks
--   [x] Registro de usuários
--   [x] CRUD de tasks
-    -   [x] Arrumar listagem só permitir listar se for o usuário da task, não esta vindo task alguma
-    -   [x] Fazer visualização
-    -   [x] Editar
-    -   [x] Exclusão
--   [x] Validação de formulários, procurar uma lib
-    -   [x] Validar login
-    -   [x] Validar email correto
-    -   [x] Validar criação e edição de tasks
--   [x] Estilização com bootstrap
-    -   [x] melhorar navbar
-        -   [x] Alinhar e centralizar
-        -   [x] Adicionar fontes
-        -   [x] Adicionar cores
-    -   [x] Deixar responsivo para celular e computador
--   # Bugs
-    -
--   # Mehorias
--   [x] Procurar tasks por dia, ao selecionar na data do calendario.
--   [x] adicionar loading durante o carregamentos das requests
--   [x] traduzir textos ptbr para ingles
--   [x] adicionar db:transaction nas transações da api, estudar como faz
--   [x] retirar os else do codigo da web
--   [x] Melhorar controller, fazer um baseController para retornar os json de sucesso e erro
--   [ ] Deploy da api e frontend
--   [] Retorno de erros com snackbar
-    -   https://www.npmjs.com/package/vue-toast-notification
--   [ ] Escrever um um readme bom em inglês
--   [ ] Confirmação de senha 2 vezes
--   [] Adicionar olho para ver a senha
--   [] Adicionar uma barra de progresso ao ir completendo as terafas
--   [] Escolher mais umas 3 frases sobre resolver tarefas e ficar trocando
+A RESTful API built with Laravel 12 that serves as the backend for the Todo App. This API handles authentication, task management, and data persistence, providing endpoints for creating, reading, updating, and deleting (CRUD) tasks.
+
+## 🚀 API Deployed
+
+> [Base URL](https://todo-app-x4hz.onrender.com) > [Check Helth status API](https://todo-app-x4hz.onrender.com/api/health-check)
+
+## ⚙️ Tech Stack
+
+-   **PHP 8.2** - Backend language
+-   **Laravel 12** - PHP framework
+-   **Sanctum** - Authentication for API tokens
+-   **Laravel UI** - Authentication scaffolding
+-   **Tinker** - Interactive command-line tool
+-   **Sail** - Docker-based development environment
+
+## 📁 Most important part of the structure folder used
+
+-   **`app/Http/Controllers/`** → Handles API logic and processes HTTP requests.
+-   **`app/Models/`** → Eloquent models for database interaction.
+-   **`database/migrations/`** → Defines database tables and schema changes.
+-   **`routes/api.php`** → Defines API endpoints.
+-   **`app/Providers/`** → Contains Laravel service providers for bootstrapping and configuring services.
+-   **`config/`** → Stores configuration files for various Laravel features.
+
+## 🛠️ How to Run Locally
+
+1. **Clone this repository:**
+
+    ```bash
+    git clone https://github.com/your-username/todo-app-backend.git
+    cd todo-app-backend
+
+    composer install
+
+     cp .env.example .env
+     php artisan key:generate
+
+     php artisan migrate --seed
+
+     php artisan serve
+    ```
+
+✅ API Features
+
+-   User authentication with Laravel Sanctum
+-   Task management (Create, Read, Update, Delete)
+-   Request validation using Laravel Form Requests
+-   API responses formatted with Laravel API Resources
+-   Token-based authentication for secure access
+-   Database migrations and seeders for testing
+-   Built-in middleware for request handling
+
+📌 Future Improvements
+
+-   Password confirmation via email for account security
+-   Task categories and labels to improve organization
+-   Task activity logs to track changes and user interactions
+-   Task progress tracking (percentage-based completion)
+-   Unit tests
