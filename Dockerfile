@@ -23,8 +23,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www/html
 
-COPY .env.production .env
-
 # Set composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
