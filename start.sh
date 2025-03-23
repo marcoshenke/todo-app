@@ -1,14 +1,26 @@
-echo "Rodando as migrations..."
+#!/bin/bash
+echo "Running the migrations..."
 php artisan migrate --force
 
-echo "Gerando a chave do Laravel..."
+echo "Generating Laravel key..."
 php artisan key:generate --force
 
-echo "Limpando rotas..."
+echo "Clearing caches..."
+php artisan config:clear
+php artisan cache:clear
 php artisan route:clear
+php artisan view:clear
 
-echo "Iniciando o PHP-FPM..."
+echo "Caching configurations and routes..."
+php artisan config:cache
+php artisan route:cache
+
+echo "Checking permissions..."
+chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+echo "Starting PHP-FPM..."
 php-fpm -D
 
-echo "Iniciando o Nginx..."
+echo "Starting Nginx..."
 nginx -g "daemon off;"
