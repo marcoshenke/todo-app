@@ -26,5 +26,6 @@ Route::get('/health-check', function () {
     return response()->json([
         'status' => 'success',
         'message' => 'API is working!',
+        'SANCTUM_STATEFUL_DOMAINS' => env('SANCTUM_STATEFUL_DOMAINS')
     ], 200);
 });
