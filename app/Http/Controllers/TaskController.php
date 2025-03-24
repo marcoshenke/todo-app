@@ -16,7 +16,7 @@ class TaskController extends BaseController
 
         $tasks =  Task::where('user_id', $userId)
             ->whereDate('task_date', $date)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('order', 'asc')
             ->get();
 
         return $this->successResponse($tasks, 'Tasks retrieved successfully');
@@ -33,11 +33,16 @@ class TaskController extends BaseController
 
         $user = Auth::user();
 
+        $taskCount = Task::where('user_id', $user->id)
+            ->whereDate('task_date', $validated['task_date'])
+            ->count();
+
         $task =  Task::create([
             'title' => $validated['title'],
             'description' => $validated['description'] ?? null,
             'task_date' => $validated['task_date'],
             'user_id' => $user->id,
+            'order' => $taskCount + 1
         ]);
 
         return $this->successResponse($task, 'Task created successfully', 201);
@@ -79,5 +84,21 @@ class TaskController extends BaseController
         }
 
         return $this->successResponse(null, 'Task deleted successfully');
+    }
+
+    public function reorder(Request $request)
+    {
+        $validated = $request->validate([
+            'tasks' => 'required|array',
+            'tasks.*.id' => 'required|exists:tasks,id',
+        ]);
+
+        foreach ($validated['tasks'] as $index => $taskData) {
+            Task::where('id', $taskData['id'])
+                ->where('user_id', Auth::id())
+                ->update(['order' => $index + 1]);
+        }
+
+        return $this->successResponse(null, 'Tasks reordered successfully');
     }
 }

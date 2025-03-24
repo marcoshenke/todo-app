@@ -13,6 +13,7 @@ Route::controller(UserController::class)->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::put('/tasks/reorder', [TaskController::class, 'reorder']);
     Route::resource('tasks', TaskController::class);
 
     Route::controller(UserController::class)->group(function () {

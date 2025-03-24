@@ -46,10 +46,8 @@ A RESTful API built with Laravel 12 that serves as the backend for the Todo App.
 
 -   User authentication with Laravel Sanctum
 -   Task management (Create, Read, Update, Delete)
--   Request validation using Laravel Form Requests
--   API responses formatted with Laravel API Resources
 -   Token-based authentication for secure access
--   Database migrations and seeders for testing
+-   Database migrations
 -   Built-in middleware for request handling
 
 📌 Future Improvements

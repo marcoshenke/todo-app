@@ -10,5 +10,6 @@ class Task extends Model
 
     protected $casts = [
         'task_date' => 'date',
+        'completed' => 'boolean',
     ];
 }
