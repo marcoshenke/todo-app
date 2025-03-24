@@ -11,9 +11,6 @@ A RESTful API built with Laravel 12 that serves as the backend for the Todo App.
 -   **PHP 8.2** - Backend language
 -   **Laravel 12** - PHP framework
 -   **Sanctum** - Authentication for API tokens
--   **Laravel UI** - Authentication scaffolding
--   **Tinker** - Interactive command-line tool
--   **Sail** - Docker-based development environment
 
 ## 📁 Most important part of the structure folder used
 
