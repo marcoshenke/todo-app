@@ -4,7 +4,7 @@ A RESTful API built with Laravel 12 that serves as the backend for the Todo App.
 
 ## 🚀 API Deployed
 
-> [Base URL](https://todo-app-x4hz.onrender.com) > [Check Helth status API](https://todo-app-x4hz.onrender.com/api/health-check)
+> [Check Helth status API](https://todo-app-x4hz.onrender.com/api/health-check)
 
 ## ⚙️ Tech Stack
 
