@@ -2,10 +2,6 @@
 
 A RESTful API built with Laravel 12 that serves as the backend for the Todo App. This API handles authentication, task management, and data persistence, providing endpoints for creating, reading, updating, and deleting (CRUD) tasks.
 
-## 🚀 API Deployed
-
-> [Check Helth status API](https://todo-app-x4hz.onrender.com/api/health-check)
-
 ## ⚙️ Tech Stack
 
 -   **PHP 8.2** - Backend language
